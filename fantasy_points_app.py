@@ -7,6 +7,7 @@ import os
 import streamlit as st
 st.set_page_config(layout="wide")
 
+conn = st.connection("postgresql", type="sql")
 @st.cache_data
 def load_data(sql_param):
     df = conn.query('select * from boxscore left join players on boxscore."PLAYER_ID" = players."PLAYER_ID"')
