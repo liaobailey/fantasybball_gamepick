@@ -9,13 +9,11 @@ st.set_page_config(layout="wide")
 
 conn = st.connection("postgresql", type="sql")
 @st.cache_data
-def load_data(sql_param):
-    df = conn.query('select * from boxscore left join players on boxscore."PLAYER_ID" = players."PLAYER_ID"')
+def load_data(file):
+    df = pd.read_csv(file)
     return df
 
-sql = 'select * from boxscore left join players on boxscore."PLAYER_ID" = players."PLAYER_ID"'
-
-df = load_data(sql)
+df = load_data('boxscores.csv')
 
 pts_input = st.sidebar.number_input("PTS: ", value = .5)
 assist_input = st.sidebar.number_input("ASSTS: ", value = 2)
