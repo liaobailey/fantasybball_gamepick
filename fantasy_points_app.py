@@ -6,15 +6,10 @@ import numpy as np
 import os
 import streamlit as st
 st.set_page_config(layout="wide")
-conn_string = st.secrets["db_url"]
-
-db = create_engine(conn_string)
-conn = db.connect()
-
 
 @st.cache_data
 def load_data(sql_param):
-    df = pd.read_sql_query(sql_param,con=conn)
+    df = conn.query('select * from boxscore left join players on boxscore."PLAYER_ID" = players."PLAYER_ID"')
     return df
 
 sql = 'select * from boxscore left join players on boxscore."PLAYER_ID" = players."PLAYER_ID"'
