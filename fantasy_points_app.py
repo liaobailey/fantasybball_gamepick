@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 # Connect to MongoDB
 @st.cache_data
 def load_data():
-    df = pd.read_csv('boxscores.csv')
+    df = pd.read_csv('boxscores_new.csv')
 # Retrieve and display data
 
 df = load_data()
