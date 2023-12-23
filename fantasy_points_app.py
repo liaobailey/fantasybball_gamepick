@@ -43,9 +43,7 @@ fg3m = 1.5
 orb = 1.6
 drb = 1.5
 
-df['fantasy_pts'] = (df['PTS']*pt + df['AST']*assist + df['STL']*steal + df['BLK']*block 
-                     + df['TOV']*turnover + df['FGM']*fgm + df['FGA']*fga + df['FTM']*ftm
-                     + df['FTA']*fta + df['FG3M']*fg3m + df['OREB']*orb + df['DREB']*drb)
+df['fantasy_pts'] = (df['PTS']*pt)
 
 
 df['cal_week'] = df['GAME_DATE'].map(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').isocalendar()[1])
