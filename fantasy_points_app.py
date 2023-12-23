@@ -6,7 +6,7 @@ import os
 import streamlit as st
 import pymongo
 st.set_page_config(layout="wide")
-
+print('load')
 # Connect to MongoDB
 @st.cache_data
 def get_mongo_db():
