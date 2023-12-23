@@ -11,6 +11,7 @@ st.set_page_config(layout="wide")
 @st.cache_data
 def load_data():
     df = pd.read_csv('boxscores_new.csv')
+    return df
 # Retrieve and display data
 
 df = load_data()
