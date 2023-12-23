@@ -43,7 +43,7 @@ fg3m = 1.5
 orb = 1.6
 drb = 1.5
 
-df['fantasy_pts'] = (df['PTS']*pt)
+df['fantasy_pts'] = df['PTS']*pt
 
 
 df['cal_week'] = df['GAME_DATE'].map(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').isocalendar()[1])
