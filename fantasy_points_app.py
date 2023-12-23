@@ -10,12 +10,11 @@ st.set_page_config(layout="wide")
 # Connect to MongoDB
 @st.cache_data
 def load_data():
-    df = pd.read_csv('boxscores_new.csv')
+    df = pd.read_csv('boxscores_2013.csv')
     return df
 # Retrieve and display data
 
 df = load_data()
-
 
 pts_input = st.sidebar.number_input("PTS: ", value = .5)
 assist_input = st.sidebar.number_input("ASSTS: ", value = 2)
@@ -30,13 +29,12 @@ ft3m_input = st.sidebar.number_input("FG3M: ", value = 1.5)
 orb_input = st.sidebar.number_input("OREB: ", value = 1.6)
 drb_input = st.sidebar.number_input("DREB: ", value = 1.5)
 
-st.write('done inputs')
-st.write(df)
-
+df['fantasy_pts'] = (df['PTS']*pts_input + df['AST']*assist_input + df['STL']*steals_input + df['BLK']*blocks_input
+                     + df['TOV']*tov_input + df['FGM']*fgm_input + df['FGA']*fga_input + df['FTM']*ftm_input
+                     + df['FTA']*fta_input + df['FG3M']*ft3m_input + df['OREB']*orb_input + df['DREB']*drb_input)
 
 df['cal_week'] = df['GAME_DATE'].map(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').isocalendar()[1])
 df['year'] = df['GAME_DATE'].map(lambda x: x[:4])
-
 fin = df.groupby(['Season', 'PLAYER_NAME', 'POSITION', 'cal_week', 'year']).agg({'fantasy_pts': ['min', 'median', 'max']}).reset_index()
 fin.columns = ['Season', 'Player', 'Position', 'cal_week', 'year', 'Min', 'Median', 'Max']
 
