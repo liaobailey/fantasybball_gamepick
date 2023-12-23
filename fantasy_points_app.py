@@ -19,7 +19,7 @@ def get_mongo_db():
 @st.cache_data
 def main():
     collection = get_mongo_db()
-    data = list(collection.find())
+    print('success')
     data = list(collection.find())
     df = pd.DataFrame(data)
     return df
