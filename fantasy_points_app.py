@@ -30,20 +30,7 @@ orb_input = st.sidebar.number_input("OREB: ", value = 1.6)
 drb_input = st.sidebar.number_input("DREB: ", value = 1.5)
 
 st.write('done inputs')
-pt = .5
-assist = 2
-steal = 3
-block = 3
-turnover = -2
-fgm = 1
-fga = -.45
-ftm = 1
-fta = -.75
-fg3m = 1.5
-orb = 1.6
-drb = 1.5
-
-df['fantasy_pts'] = df['PTS']*pt
+st.write(df)
 
 
 df['cal_week'] = df['GAME_DATE'].map(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').isocalendar()[1])
