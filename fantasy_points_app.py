@@ -13,6 +13,7 @@ st.write('load')
 @st.cache_data
 def get_mongo_db():
     client = pymongo.MongoClient(st.secrets["db_uri"])
+    st.write('load')
     db = client.nba
     collection = db.boxscores
     return collection
