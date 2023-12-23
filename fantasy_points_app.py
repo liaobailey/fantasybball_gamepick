@@ -1,19 +1,29 @@
-import psycopg2
-from sqlalchemy import create_engine
 import datetime
 import pandas as pd
 import numpy as np
 import os
 import streamlit as st
+import pymongo
 st.set_page_config(layout="wide")
 
-conn = st.connection("postgresql", type="sql")
+# Connect to MongoDB
 @st.cache_data
-def load_data(file):
-    df = pd.read_csv(file)
+def get_mongo_db():
+    client = pymongo.MongoClient("mongodb+srv://baileyliao:OvzIZTVsmg6giPis@cluster0.rifrpxv.mongodb.net")
+    db = client.nba
+    collection = db.boxscores
+    return collection
+
+# Retrieve and display data
+@st.cache_data
+def main():
+    collection = get_mongo_db()
+    data = list(collection.find())
+    data = list(collection.find())
+    df = pd.DataFrame(data)
     return df
 
-df = load_data('boxscores.csv')
+df = main()
 
 pts_input = st.sidebar.number_input("PTS: ", value = .5)
 assist_input = st.sidebar.number_input("ASSTS: ", value = 2)
