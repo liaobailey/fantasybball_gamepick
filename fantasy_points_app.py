@@ -30,7 +30,23 @@ orb_input = st.sidebar.number_input("OREB: ", value = 1.6)
 drb_input = st.sidebar.number_input("DREB: ", value = 1.5)
 
 st.write('done inputs')
-df['fantasy_pts'] = (df['PTS']*pts_input + df['AST']*assist_input + df['STL']*steals_input + df['BLK']*blocks_input + df['TOV']*tov_input + df['FGM']*fgm_input + df['FGA']*fga_input + df['FTM']*ftm_input + df['FTA']*fta_input + df['FG3M']*ft3m_input + df['OREB']*orb_input + df['DREB']*drb_input)
+pt = .5
+assist = 2
+steal = 3
+block = 3
+turnover = -2
+fgm = 1
+fga = -.45
+ftm = 1
+fta = -.75
+fg3m = 1.5
+orb = 1.6
+drb = 1.5
+
+df['fantasy_pts'] = (df['PTS']*pt + df['AST']*assist + df['STL']*steal + df['BLK']*block 
+                     + df['TOV']*turnover + df['FGM']*fgm + df['FGA']*fga + df['FTM']*ftm
+                     + df['FTA']*fta + df['FG3M']*fg3m + df['OREB']*orb + df['DREB']*drb)
+
 
 df['cal_week'] = df['GAME_DATE'].map(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').isocalendar()[1])
 df['year'] = df['GAME_DATE'].map(lambda x: x[:4])
