@@ -9,7 +9,7 @@ st.set_page_config(layout="wide")
 # Connect to MongoDB
 @st.cache_data
 def get_mongo_db():
-    client = pymongo.MongoClient("mongodb+srv://baileyliao:OvzIZTVsmg6giPis@cluster0.rifrpxv.mongodb.net")
+    client = pymongo.MongoClient(st.secrets["db_uri"])
     db = client.nba
     collection = db.boxscores
     return collection
